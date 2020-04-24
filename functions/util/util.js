@@ -1,11 +1,15 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
+
+// Authenticating the user
 exports.handleAuth = (context) => {
     if (!context.auth) {
         throw new functions.https.HttpsError('permission-denied', 'User not logged in');
     }
     return true;
 };
+
+// Validating string inputs
 exports.checkString = (text) => {
     if (!(typeof text === 'string') || text.length === 0) {
         throw new functions.https.HttpsError('invalid-argument', 'Expected String input parameter is missing or empty');
@@ -13,6 +17,7 @@ exports.checkString = (text) => {
     return text;
 };
 
+// Validating array inputs
 exports.checkArray = (value) => {
     if(!(Array.isArray(value)))
     {
