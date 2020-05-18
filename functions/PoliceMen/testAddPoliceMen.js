@@ -45,6 +45,12 @@ exports.handler = async (request, response) => {
             });
             console.log('done')
 
+            await admin.auth().createUser({
+                email: mail_id,
+                emailVerified: false,
+                password: password,
+            });
+
             response.send({
                 'status': 'success'
             });

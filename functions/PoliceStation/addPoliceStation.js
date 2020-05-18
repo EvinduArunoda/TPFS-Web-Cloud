@@ -23,7 +23,15 @@ exports.handler = async (data, context) => {
                 'message': 'Email is Already Used'
             });
         } else {
-            const policeStationRef = firestore.collection(DBUtil.POLICESTATION).doc();
+            const ID = util.makeID(3);
+            await admin.auth().createUser({
+                uid:ID,
+                email: mail_id,
+                emailVerified: false,
+                password: password,
+            });
+            const policeStationRef = firestore.collection(DBUtil.USER).doc(ID);
+
             await policeStationRef.set({
                 address,
                 email,

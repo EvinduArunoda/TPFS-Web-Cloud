@@ -1,3 +1,4 @@
 exports.USER = 'WebUsers';
 exports.POLICEMEN =  'PoliceMen';
-exports.POLICESTATION = 'PoliceStation';
+exports.DRIVER = 'Drivers';
+exports.VEHICLE = 'vehicle';

@@ -13,7 +13,6 @@ exports.handler = async (data, context) => {
         const last_name = util.checkString(data['last_name']);
         const mail_id = util.checkemail(data['mail_id']);
         const phone_number = util.checkString(data['phone_number']);
-        const station_id = util.checkString(data['station_id']);
         const password = util.checkString(data['password']);
 
         const policeMenSnaps = await firestore.collection('PoliceMen').where('mail_id', '==', mail_id).get();
@@ -33,7 +32,9 @@ exports.handler = async (data, context) => {
                 'message': 'EmployeeID is Already Used'
             });
         } else {
-            const policeMenRef = firestore.collection(DBUtil.POLICEMEN).doc();
+            const ID = util.makeID(3);
+
+            const policeMenRef = firestore.collection(DBUtil.POLICEMEN).doc(ID);
             await policeMenRef.set({
                 address,
                 employee_id,
@@ -41,9 +42,17 @@ exports.handler = async (data, context) => {
                 last_name,
                 mail_id,
                 phone_number,
-                station_id
+                'station_id':null
             });
             console.log('done')
+
+            await admin.auth().createUser({
+                uid:ID,
+                email: mail_id,
+                emailVerified: false,
+                password: password,
+            });
+
 
             return ({
                 'status': 'success'
