@@ -11,7 +11,7 @@ exports.handler = async (data, context) => {
         const LicensePlate = util.checkString(data['LicensePlate']);
         const makeAndModel = util.checkString(data['makeAndModel']);
         const registeredNumber = util.checkString(data['registeredNumber']);
-        const registeredOwner  = util.checkString(data['registeredOwner ']);
+        const registeredOwner = util.checkString(data['registeredOwner']);
         const ownerID = util.checkString(data['ownerID']);
 
         const vehicleSnaps = await firestore.collection('vehicle').where('LicensePlate', '==', LicensePlate).get();

@@ -7,8 +7,8 @@ const AddDriver = require('./Driver/addDriver');
 const AddPhysicalDisabilities = require('./Driver/addPhysicalDisabilities');
 const AssignPoliceStation = require('./PoliceMen/assignPoliceStation');
 const AddVehicle = require('./Vehicle/addVehicle');
-const AddVehicleDetails = require('./Vehicle/addVehicleDetatails');
-
+const AddVehicleDetails = require('./Vehicle/addVehicleDetails');
+const AddManualPayment = require('./Ticket/addManualPayment');
 
 const TestAddPoliceMen = require('./PoliceMen/testAddPoliceMen');
 admin.initializeApp();
@@ -21,6 +21,7 @@ exports.AddPhysicalDisabilities = functions.https.onCall(AddPhysicalDisabilities
 exports.AssignPoliceStation = functions.https.onCall(AssignPoliceStation.handler);
 exports.AddVehicle = functions.https.onCall(AddVehicle.handler);
 exports.AddVehicleDetails = functions.https.onCall(AddVehicleDetails.handler);
+exports.AddManualPayment = functions.https.onCall(AddManualPayment.handler);
 
 // Testing Functions
 exports.TestAddPoliceMen = functions.https.onRequest(TestAddPoliceMen.handler);

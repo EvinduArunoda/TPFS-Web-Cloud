@@ -1,6 +1,7 @@
 const admin = require('firebase-admin');
 const util = require('../util/util');
 const DBUtil = require('../util/db_util');
+const emailHandler = require('../Email/send_email');
 
 exports.handler = async (data, context) => {
     try {
@@ -12,10 +13,16 @@ exports.handler = async (data, context) => {
         const email = util.checkemail(data['email']);
         const phone_number = util.checkString(data['phone_number']);
         const station_id = util.checkString(data['station_id']);
-        const password = util.checkString(data['password']);
+        // const password = util.checkString(data['password']);
+        const rta = util.checkemail(data['rta']);
+
+        const password = util.makePassword(3);
 
         const policeStationSnaps = await firestore.collection('WebUser').where('email', '==', email).get();
         const policeStationDocs = policeStationSnaps.docs;
+
+        const RTA = await firestore.collection('WebUser').where('email','==',rta).get();
+        const RTADoc = RTA.docs;
 
         if (policeStationDocs.length !== 0) {
             return ({
@@ -38,9 +45,18 @@ exports.handler = async (data, context) => {
                 region,
                 phone_number,
                 station_id,
-                'type' : 'policeStation'
+                'type' : 'policeStation',
+                'rta': RTADoc[0].ref
             });
             console.log('done')
+            const msg = {
+                to: email,
+                from: 'tpfs@email.com',
+                subject: 'Account Verification',
+                text: 'Your initial password for tpfs web application is : ' + password,
+                html: `<strong>Your initial password for tpfs web application is : ${password}</strong>`,
+            };
+            await emailHandler.sendEmail(msg);
 
             return ({
                 'status': 'success'

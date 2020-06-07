@@ -1,6 +1,7 @@
 const admin = require('firebase-admin');
 const util = require('../util/util');
 const DBUtil = require('../util/db_util');
+const emailHandler = require('../Email/send_email');
 
 exports.handler = async (data, context) => {
     try {
@@ -13,7 +14,8 @@ exports.handler = async (data, context) => {
         const emailAddress = util.checkemail(data['emailAddress']);
         const name = util.checkString(data['name']);
         const nic = util.checkString(data['NIC']);
-        const password = util.checkString(data['password']);
+        // const password = util.checkString(data['password']);
+        const password = util.makePassword(3);
 
         const driverSnaps = await firestore.collection('Drivers').where('emailaddress', '==', emailAddress).get();
         const driverDocs = driverSnaps.docs;
@@ -54,6 +56,14 @@ exports.handler = async (data, context) => {
                 password: password,
             });
 
+            const msg = {
+                to: emailAddress,
+                from: 'tpfs@email.com',
+                subject: 'Account Verification',
+                text: 'Your initial password for tpfs web application is : ' + password,
+                html: `<strong>Your initial password for tpfs web application is : ${password}</strong>`,
+            };
+            await emailHandler.sendEmail(msg);
 
             return ({
                 'status': 'success'

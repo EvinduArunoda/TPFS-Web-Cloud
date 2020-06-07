@@ -7,7 +7,7 @@ exports.handler = async (data, context) => {
         util.handleAuth(context);
         const firestore = admin.firestore();
 
-        const email = util.checkString(data['email']);
+        const email = util.checkemail(data['email']);
         const station = data['station'];
 
         const driverSnaps = await firestore.collection('PoliceMen').where('mail_id', '==', email).get();

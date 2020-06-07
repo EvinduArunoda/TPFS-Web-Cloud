@@ -64,8 +64,20 @@ exports.checkBool = (value) => {
     return value;
 };
 
-// creating channel ID for appointments
+// creating ID for users
 exports.makeID = (length) => {
+    let result           = '';
+    let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    let charactersLength = characters.length;
+    for ( let i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    result = result + admin.firestore.Timestamp.now().seconds.toString();
+    return result;
+}
+
+// creating passwords for users
+exports.makePassword = (length) => {
     let result           = '';
     let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     let charactersLength = characters.length;

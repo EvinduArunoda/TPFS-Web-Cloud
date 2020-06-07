@@ -1,6 +1,7 @@
 const admin = require('firebase-admin');
 const util = require('../util/util');
 const DBUtil = require('../util/db_util');
+const emailHandler = require('../Email/send_email');
 
 exports.handler = async (data, context) => {
     try {
@@ -13,7 +14,9 @@ exports.handler = async (data, context) => {
         const last_name = util.checkString(data['last_name']);
         const mail_id = util.checkemail(data['mail_id']);
         const phone_number = util.checkString(data['phone_number']);
-        const password = util.checkString(data['password']);
+        // const password = util.checkString(data['password']);
+
+        const password = util.makePassword(3);
 
         const policeMenSnaps = await firestore.collection('PoliceMen').where('mail_id', '==', mail_id).get();
         const policeMenDocs = policeMenSnaps.docs;
@@ -53,6 +56,14 @@ exports.handler = async (data, context) => {
                 password: password,
             });
 
+            const msg = {
+                to: mail_id,
+                from: 'tpfs@email.com',
+                subject: 'Account Verification',
+                text: 'Your initial password for tpfs policeman mobile application is : ' + password,
+                html: `<strong>Your initial password for tpfs policeman mobile application is : ${password}</strong>`,
+            };
+            await emailHandler.sendEmail(msg);
 
             return ({
                 'status': 'success'
