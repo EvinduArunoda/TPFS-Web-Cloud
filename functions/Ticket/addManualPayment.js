@@ -1,6 +1,7 @@
 const admin = require('firebase-admin');
 const util = require('../util/util');
 const DBUtil = require('../util/db_util');
+const emailHandler = require('../Email/send_email');
 
 exports.handler = async (data, context) => {
     try {
@@ -12,7 +13,7 @@ exports.handler = async (data, context) => {
 
         const payments = await firestore.collection('Payment').where('receiptNo', '==', receiptNo).get();
         const paymentDocs = payments.docs;
-        if (paymentDocs.length === 0) {id
+        if (paymentDocs.length === 0) {
 
             const Ticket = firestore.collection(DBUtil.TICKET).doc(TktId);
             const TicketSnap = await Ticket.get();
@@ -36,6 +37,16 @@ exports.handler = async (data, context) => {
                 status: 'manual',
                 receiptNo
             });
+
+            const msg = {
+                to: driverSnap.data().emailaddress,
+                from: 'tpfs@email.com',
+                subject: 'Closing ticket alert',
+                text: 'Your ticket has been closed',
+                html: `<strong>Your ticket has been closed.</strong>`,
+            };
+            await emailHandler.sendEmail(msg);
+
             return ({
                 'status': 'success'
             });

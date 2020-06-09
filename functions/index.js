@@ -9,7 +9,7 @@ const AssignPoliceStation = require('./PoliceMen/assignPoliceStation');
 const AddVehicle = require('./Vehicle/addVehicle');
 const AddVehicleDetails = require('./Vehicle/addVehicleDetails');
 const AddManualPayment = require('./Ticket/addManualPayment');
-
+const CheckExpiredTickets = require('./Scheduler/ticketDueCheck');
 const TestAddPoliceMen = require('./PoliceMen/testAddPoliceMen');
 admin.initializeApp();
 
@@ -22,6 +22,6 @@ exports.AssignPoliceStation = functions.https.onCall(AssignPoliceStation.handler
 exports.AddVehicle = functions.https.onCall(AddVehicle.handler);
 exports.AddVehicleDetails = functions.https.onCall(AddVehicleDetails.handler);
 exports.AddManualPayment = functions.https.onCall(AddManualPayment.handler);
-
+exports.CheckExpiredTickets = functions.pubsub.schedule('every 60 minutes').onRun(CheckExpiredTickets.handler);
 // Testing Functions
 exports.TestAddPoliceMen = functions.https.onRequest(TestAddPoliceMen.handler);

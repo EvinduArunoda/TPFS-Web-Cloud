@@ -33,7 +33,7 @@ exports.handler = async (data, context) => {
             const ID = util.makeID(3);
             await admin.auth().createUser({
                 uid:ID,
-                email: mail_id,
+                email: email,
                 emailVerified: false,
                 password: password,
             });
