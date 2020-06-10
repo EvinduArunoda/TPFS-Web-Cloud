@@ -11,7 +11,8 @@ exports.handler = async (context) => {
     const missedTickets = await firestore.collection('Ticket').where('Status','==','open').where('Time','<',twoWeeksBefore).get();
     const missedTicketDocs = missedTickets.docs;
 
-    for(const Ticket of missedTicketDocs) {
+    for (const Ticket of missedTicketDocs) {
+
         await Ticket.ref.update({
             'Status': 'due'
         });
