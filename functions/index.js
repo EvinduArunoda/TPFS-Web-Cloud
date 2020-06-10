@@ -24,6 +24,8 @@ exports.AddPhysicalDisabilities = functions.https.onCall(AddPhysicalDisabilities
 exports.AssignPoliceStation = functions.https.onCall(AssignPoliceStation.handler);
 exports.AddVehicle = functions.https.onCall(AddVehicle.handler);
 exports.AddVehicleDetails = functions.https.onCall(AddVehicleDetails.handler);
+
+// Ticket Payment Handling function
 exports.AddManualPayment = functions.https.onCall(AddManualPayment.handler);
 
 // Reset password functions
