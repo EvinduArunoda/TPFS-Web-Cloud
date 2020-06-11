@@ -21,7 +21,7 @@ exports.handler = async (data, context) => {
         const policeStationSnaps = await firestore.collection('WebUser').where('email', '==', email).get();
         const policeStationDocs = policeStationSnaps.docs;
 
-        const RTA = await firestore.collection('WebUser').where('email','==',rta).get();
+        const RTA = await firestore.collection('WebUsers').where('email','==',rta).get();
         const RTADoc = RTA.docs;
 
         if (policeStationDocs.length !== 0) {
@@ -51,7 +51,7 @@ exports.handler = async (data, context) => {
             console.log('done')
             const msg = {
                 to: email,
-                from: 'tpfs@email.com',
+                from: 'tpfsuom@gmail.com',
                 subject: 'Account Verification',
                 text: 'Your initial password for tpfs web application is : ' + password,
                 html: `<strong>Your initial password for tpfs web application is : ${password}</strong>`,

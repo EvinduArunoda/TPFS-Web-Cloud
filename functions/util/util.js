@@ -30,10 +30,10 @@ exports.isNumber = (value) => {
     return typeof value === 'number';
 };
 
-exports.checkEmail = (email) => {
-    exports.checkString(email);
-    return email;
-};
+// exports.checkEmail = (email) => {
+//     exports.checkString(email);
+//     return email;
+// };
 
 exports.checkemail = (email) => {
     if (!(typeof email === 'string') || email.length === 0) {

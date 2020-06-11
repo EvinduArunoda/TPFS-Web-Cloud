@@ -40,7 +40,7 @@ exports.handler = async (data, context) => {
 
             const msg = {
                 to: driverSnap.data().emailaddress,
-                from: 'tpfs@email.com',
+                from: 'tpfsuom@gmail.com',
                 subject: 'Closing ticket alert',
                 text: 'Your ticket has been closed',
                 html: `<strong>Your ticket has been closed.</strong>`,

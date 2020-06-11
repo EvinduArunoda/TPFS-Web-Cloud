@@ -37,7 +37,7 @@ exports.handler = async (data, context) => {
 
             const msg = {
                 to: email,
-                from: 'tpfs@email.com',
+                from: 'tpfsuom@gmail.com',
                 subject: 'Reset Password',
                 text: 'Reset password account verification code : ' + code.toString(),
                 html: `<strong>Reset password account verification code : ${code.toString()}</strong>`,

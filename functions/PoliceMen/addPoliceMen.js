@@ -58,7 +58,7 @@ exports.handler = async (data, context) => {
 
             const msg = {
                 to: mail_id,
-                from: 'tpfs@email.com',
+                from: 'tpfsuom@gmail.com',
                 subject: 'Account Verification',
                 text: 'Your initial password for tpfs policeman mobile application is : ' + password,
                 html: `<strong>Your initial password for tpfs policeman mobile application is : ${password}</strong>`,

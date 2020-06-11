@@ -33,6 +33,9 @@ exports.handler = async (data, context) => {
                     await admin.auth().updateUser(User.uid,{
                         password: password
                     });
+
+                    await codeDocs[0].ref.delete();
+
                     return ({
                         'status': 'success'
                     });

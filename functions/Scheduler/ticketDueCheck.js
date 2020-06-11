@@ -23,7 +23,7 @@ exports.handler = async (context) => {
         if (driverDocs.length !== 0) {
             const msg = {
                 to: driverDocs[0].data().emailaddress,
-                from: 'tpfs@email.com',
+                from: 'tpfsuom@gmail.com',
                 subject: 'Ticket Expired Alert',
                 text: 'You have not paid your ticket on time. You will be directed to the court and details will be sent.',
                 html: `<strong>You have not paid your ticket on time. You will be directed to the court and details will be sent.</strong>`,
