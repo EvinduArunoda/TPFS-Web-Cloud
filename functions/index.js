@@ -2,15 +2,24 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 
 const AddPoliceMen = require('./PoliceMen/addPoliceMen');
+const TestAddPoliceMen = require('./PoliceMen/testAddPoliceMen');  // For Testing
+
 const AddPoliceStation = require('./PoliceStation/addPoliceStation');
+const TestAddPoliceStation = require('./PoliceStation/testAddPoliceStation'); // For Testing
+
 const AddDriver = require('./Driver/addDriver');
+const TestAddDriver = require('./Driver/testAddDriver'); // For testing
+
 const AddPhysicalDisabilities = require('./Driver/addPhysicalDisabilities');
+const TestAddPhysicalDisabilities = require('./Driver/testAddPhysicalDisabilities'); // For Testing
+
 const AssignPoliceStation = require('./PoliceMen/assignPoliceStation');
+const TestAssignPoliceStation = require('./PoliceMen/testAssignPoliceStation'); // For Testing
+
 const AddVehicle = require('./Vehicle/addVehicle');
 const AddVehicleDetails = require('./Vehicle/addVehicleDetails');
 const AddManualPayment = require('./Ticket/addManualPayment');
 const CheckExpiredTickets = require('./Scheduler/ticketDueCheck');
-const TestAddPoliceMen = require('./PoliceMen/testAddPoliceMen');
 const SendCode = require('./ResetPassword/SendCode');
 const CheckCode = require('./ResetPassword/CheckCode');
 const ResetPassword = require('./ResetPassword/ResetPassword');
@@ -38,3 +47,7 @@ exports.CheckExpiredTickets = functions.pubsub.schedule('every 60 minutes').onRu
 
 // Testing Functions
 exports.TestAddPoliceMen = functions.https.onRequest(TestAddPoliceMen.handler);
+exports.TestAddPoliceStation = functions.https.onRequest(TestAddPoliceStation.handler);
+exports.TestAddDriver = functions.https.onRequest(TestAddDriver.handler);
+exports.TestAddPhysicalDisabilities = functions.https.onRequest(TestAddPhysicalDisabilities.handler);
+exports.TestAssignPoliceStation = functions.https.onRequest(TestAssignPoliceStation.handler);
