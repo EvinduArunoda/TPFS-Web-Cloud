@@ -4,5 +4,5 @@ exports.DRIVER = 'Drivers';
 exports.VEHICLE = 'vehicle';
 exports.TICKET = 'Ticket';
 exports.PAYMENT = 'Payment';
-exports.SENDGRID_API_KEY = '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';
+exports.SENDGRID_API_KEY = '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';
 exports.CODES = 'ResetPasswordCodes';

@@ -17,6 +17,13 @@ exports.checkString = (text) => {
     return text;
 };
 
+exports.checkStringTest = (text) => {
+    if (!(typeof text === 'string') || text.length === 0) {
+        return false;
+    }
+    return text;
+};
+
 // Validating array inputs
 exports.checkArray = (value) => {
     if(!(Array.isArray(value)))
@@ -26,14 +33,17 @@ exports.checkArray = (value) => {
     return value;
 };
 
+exports.checkArrayTest = (value) => {
+    if(!(Array.isArray(value)))
+    {
+        return false;
+    }
+    return value;
+};
+
 exports.isNumber = (value) => {
     return typeof value === 'number';
 };
-
-// exports.checkEmail = (email) => {
-//     exports.checkString(email);
-//     return email;
-// };
 
 exports.checkemail = (email) => {
     if (!(typeof email === 'string') || email.length === 0) {
@@ -43,6 +53,19 @@ exports.checkemail = (email) => {
         const dotposition = email.lastIndexOf(".");
         if ((atposition < 1 || dotposition < atposition + 2 || dotposition + 2 >= email.length)) {
             throw new functions.https.HttpsError('invalid-argument', 'Email address is not in the correct format');
+        }
+    }
+    return email;
+}
+
+exports.checkEmailTest = (email) => {
+    if (!(typeof email === 'string') || email.length === 0) {
+        return false;
+    } else {
+        const atposition = email.indexOf("@");
+        const dotposition = email.lastIndexOf(".");
+        if ((atposition < 1 || dotposition < atposition + 2 || dotposition + 2 >= email.length)) {
+            return false;
         }
     }
     return email;
